@@ -1,4 +1,10 @@
 var mongoose = require('mongoose');
 var uri = process.env.MONGO_URL;
 
-mongoose.connect(uri, { useNewUrlParser: true });
+function connectDB() {
+  mongoose.connect(uri, { useNewUrlParser: true })
+    .then(() => console.log('Database connected'))
+    .catch(error => console.error('Database connection failed:', error));
+}
+
+connectDB();
