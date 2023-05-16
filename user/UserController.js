@@ -13,7 +13,7 @@ router.post('/', function(req, res) {
         password: req.body.password
     },
         function(err, user) {
-            if (err) return res.status(500).send("User 생성 실패.");
+            if (err) return res.status(500).send(err);
             res.status(200).send(user);
     });
 });
@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
 //User 전체 조회
 router.get('/', function(req, res) {
     User.find( {}, function(err, users) {
-        if (err) return res.status(500).send("User 전체 조회 실패.");
+        if (err) return res.status(500).send(err);
         res.status(200).send(users);
     });
 });
