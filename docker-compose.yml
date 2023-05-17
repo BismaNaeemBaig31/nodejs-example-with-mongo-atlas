@@ -7,7 +7,7 @@ services:
       - "3007:3007"
     environment:
       - PORT=3007
-       - MONGO_URL=${MONGO_URL}
+      - MONGO_URL=${MONGO_URL}
     depends_on:
       - db
 
