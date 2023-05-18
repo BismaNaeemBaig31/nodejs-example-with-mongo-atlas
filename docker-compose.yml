@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: bismabaig/nodejs:test 
+    image: bismabaig/nodejs:${BUILD_ID}
     ports:
       - "3007:3007"
     environment:
