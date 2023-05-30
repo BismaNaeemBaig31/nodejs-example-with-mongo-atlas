@@ -30,16 +30,16 @@ pipeline {
   } // end of stages
     post {
         always {
-            slackSend channel: 'jenkins',  message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} started"
+            slackSend channel: 'jenkins', color: 'good' , message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} started"
         }
         success {
-            slackSend channel: 'jenkins',  message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} success"
+            slackSend channel: 'jenkins', color: 'good' ,  message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} success"
         }
         failure {
-            slackSend channel: 'jenkins',  message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} failure"
+            slackSend channel: 'jenkins', color: 'bad' , message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} failure"
         }
         unstable {
-            slackSend channel: 'jenkins',  message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} unstable"
+            slackSend channel: 'jenkins', color: 'bad' ,  message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} unstable"
         }
     }
 
