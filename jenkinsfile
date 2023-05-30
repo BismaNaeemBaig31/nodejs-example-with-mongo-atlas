@@ -15,7 +15,6 @@ MONGO_URL = credentials('mongo-url')
     stage('Build step') {
         environment {
             DOCKER_CREDS= credentials('github_id')
-            MONGO_URL = credentials('mongo-url')
             }
         steps {
             sh '''
