@@ -2,6 +2,9 @@ pipeline {
     agent {
   label 'labk8z'
 }
+environment {
+MONGO_URL = credentials('mongo-url')
+}
   stages{
     stage('Git') {
         steps {
