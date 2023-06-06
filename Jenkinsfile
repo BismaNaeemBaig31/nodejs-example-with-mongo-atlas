@@ -4,26 +4,12 @@ pipeline {
 }
 environment {
 MONGO_URL = credentials('mongo-url')
+DOCKER_CREDS= credentials('github_id')
 }
   stages{
     stage('Git') {
         steps {
             git credentialsId: 'githubnew', url: 'https://github.com/BismaNaeemBaig31/nodejs-example-with-mongo-atlas.git'
-        }
-    }
-    
-    stage('Build step') {
-        environment {
-            DOCKER_CREDS= credentials('github_id')
-            }
-        steps {
-            sh '''
-            docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
-            docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:latest
-            docker push bismabaig/nodejs:$BUILD_ID 
-            docker push bismabaig/nodejs:latest
-            env
-            '''
         }
     }
     stage('Main Branch') {
@@ -33,9 +19,9 @@ MONGO_URL = credentials('mongo-url')
         }
     }
     steps {
-        script {
+        docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
             docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID
-        }
+            docker push bismabaig/nodejs:$BUILD_ID
     }
 }
 
@@ -46,9 +32,8 @@ MONGO_URL = credentials('mongo-url')
             }
         }
         steps {
-            script {
                 docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:dev-$BUILD_ID
-            }
+                docker push bismabaig/nodejs:$BUILD_ID
 
         }
     }
