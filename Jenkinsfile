@@ -21,8 +21,9 @@ pipeline {
             steps {
                 script {
                     sh "docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW"
-                    sh "docker build -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID ."
-                    sh "docker push bismabaig/nodejs:$BUILD_ID"
+                    sh "docker build  -t bismabaig/nodejs:prod-$BUILD_ID ."
+                    sh "docker push bismabaig/nodejs:prod-$BUILD_ID"
+                    sh "docker logout"
                 }
             }
         }
@@ -34,8 +35,10 @@ pipeline {
             }
             steps {
                 script {
-                    sh "docker build -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:dev-$BUILD_ID ."
-                    sh "docker push bismabaig/nodejs:$BUILD_ID"
+                    sh "docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW"
+                    sh "docker build  -t bismabaig/nodejs:dev-$BUILD_ID ."
+                    sh "docker push bismabaig/nodejs:dev-$BUILD_ID"
+                    sh "docker logout"
                 }
             }
         }
