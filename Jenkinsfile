@@ -20,7 +20,7 @@ DOCKER_CREDS= credentials('github_id')
     }
     steps {
         docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
-            docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID
+            docker build . "-t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID"
             docker push bismabaig/nodejs:$BUILD_ID
     }
 }
@@ -32,7 +32,7 @@ DOCKER_CREDS= credentials('github_id')
             }
         }
         steps {
-                docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:dev-$BUILD_ID
+                docker build . "-t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:dev-$BUILD_ID"
                 docker push bismabaig/nodejs:$BUILD_ID
 
         }
