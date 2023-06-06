@@ -29,6 +29,36 @@ MONGO_URL = credentials('mongo-url')
             '''
         }
     }
+    stage('Main Branch') {
+    when {
+        expression {
+            return env.BRANCH_NAME == 'main'
+        }
+    }
+    steps {
+        script {
+            docker.build(".")
+                  .t("bismabaig/nodejs:${BUILD_ID}")
+                  .t("bismabaig/nodejs:prod-${BUILD_ID}")
+                  .execute()
+        }
+    }
+}
+    stage('Dev Branch') {
+    when {
+        expression {
+            return env.BRANCH_NAME == 'dev'
+        }
+    }
+    steps {
+        script {
+            docker.build(".")
+                  .t("bismabaig/nodejs:${BUILD_ID}")
+                  .t("bismabaig/nodejs:dev-${BUILD_ID}")
+                  .execute()
+        }
+    }
+}
   } // end of stages
     post {
         always {
