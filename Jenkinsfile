@@ -19,11 +19,9 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
-                    docker build . "-t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID"
-                    docker push "bismabaig/nodejs:$BUILD_ID"
-                }
+                docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
+                docker build . "-t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID"
+                docker push "bismabaig/nodejs:$BUILD_ID"
             }
         }
         stage('Dev Branch') {
@@ -33,33 +31,23 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    docker build . "-t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:dev-$BUILD_ID"
-                    docker push "bismabaig/nodejs:$BUILD_ID"
-                }
+                docker build . "-t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:dev-$BUILD_ID"
+                docker push "bismabaig/nodejs:$BUILD_ID"
             }
         }
-    } // end of stages
+    }
     post {
         always {
-            script {
-                slackSend channel: 'jenkins', color: 'good', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} started ${MONGO_URL}"
-            }
+            slackSend channel: 'jenkins', color: 'good', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} started ${MONGO_URL}"
         }
         success {
-            script {
-                slackSend channel: 'jenkins', color: 'good', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} success"
-            }
+            slackSend channel: 'jenkins', color: 'good', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} success"
         }
         failure {
-            script {
-                slackSend channel: 'jenkins', color: 'bad', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} failure"
-            }
+            slackSend channel: 'jenkins', color: 'bad', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} failure"
         }
         unstable {
-            script {
-                slackSend channel: 'jenkins', color: 'bad', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} unstable"
-            }
+            slackSend channel: 'jenkins', color: 'bad', message: "${JOB_NAME} ${BUILD_DISPLAY_NAME} unstable"
         }
     }
 }
