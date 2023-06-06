@@ -42,7 +42,7 @@ MONGO_URL = credentials('mongo-url')
     stage('Dev Branch') {
         when {
             expression {
-                
+                return env.BRANCH_NAME == 'dev'
             }
         }
         steps {
