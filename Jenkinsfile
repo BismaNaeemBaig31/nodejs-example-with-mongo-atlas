@@ -34,7 +34,7 @@ MONGO_URL = credentials('mongo-url')
     }
     steps {
         script {
-            docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD-ID
+            docker build . -t bismabaig/nodejs:$BUILD_ID -t bismabaig/nodejs:prod-$BUILD_ID
         }
     }
 }
