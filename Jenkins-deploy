@@ -1,0 +1,22 @@
+pipeline {
+    agent {
+  label 'labk8z'
+}
+  stages{
+    
+    stage('Deploy step') {
+        environment {
+            DOCKER_CREDS= credentials('github_id')
+            }
+        steps {
+            sh '''
+            docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
+            sh "docker compose pull"
+            sh "docker compose up -d" 
+            docker logout
+            env
+            '''
+        }
+    }
+  } 
+} 
