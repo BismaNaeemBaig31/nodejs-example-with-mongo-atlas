@@ -8,6 +8,7 @@ pipeline {
     
     stage('Deploy step') {
         environment {
+            MONGO_URL = credentials('mongo-url')
             DOCKER_CREDS= credentials('github_id')
             }
         steps {
