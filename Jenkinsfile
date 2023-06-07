@@ -12,10 +12,10 @@ pipeline {
                 git credentialsId: 'githubnew', url: 'https://github.com/BismaNaeemBaig31/nodejs-example-with-mongo-atlas.git'
             }
         }
-        stage('Main Branch') {
+        stage('Master Branch') {
             when {
                 expression {
-                    return env.BRANCH_NAME == 'main'
+                    return env.BRANCH_NAME == 'master'
                 }
             }
             steps {
