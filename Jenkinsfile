@@ -7,11 +7,7 @@ pipeline {
         DOCKER_CREDS = credentials('github_id')
     }
     stages {
-        stage('Git') {
-            steps {
-                git credentialsId: 'githubnew', url: 'https://github.com/BismaNaeemBaig31/nodejs-example-with-mongo-atlas.git'
-            }
-        }
+        
         stage('Master Branch') {
             when {
                 expression {
