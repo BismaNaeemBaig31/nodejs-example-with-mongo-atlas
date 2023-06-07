@@ -3,6 +3,12 @@ pipeline {
   label 'labk8z'
 }
   stages{
+
+    stage('Git') {
+            steps {
+                git credentialsId: 'githubnew', url: 'https://github.com/BismaNaeemBaig31/nodejs-example-with-mongo-atlas.git'
+            }
+        }
     
     stage('Deploy step') {
         environment {
